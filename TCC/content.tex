@@ -1,0 +1,244 @@
+%----------------------------------------------------------------------------------
+% Exemplo do uso da classe tcc.cls. Veja o arquivo .cls
+% para mais detalhes e instruções.
+%----------------------------------------------------------------------------------
+
+%INTRODUCAO
+%----------------------------------------------------------------------------------
+
+\frenchspacing
+
+\chapter{\label{chap:intro}Introdução}
+% Comando para inserir siglas. Tanto as siglas quanto as
+% abreviaturas devem aparecer em ordem ALFABÉTICA nas listas
+% correspondentes. Como a classe no momento não é capaz de ordenar
+% as entradas automaticamente, existem duas alternativas:
+%
+%    a- Insira todas as siglas e abreviaturas no começo do texto,
+%    manualmente e em ordem alfabética.
+%
+%    b- Caso esteja em um ambiente UNIX (Linux, Mac ou Cygwin/similares),
+%    utilize o script sort.sh e o makefile que acompanham a
+%    classe. O makefile automaticamente compila a monografia para
+%    PDF (mas assume que o latex está acessível pela linha de
+%    comando). Neste caso a ordenação é feita de forma automática.
+%
+\sigla{abc}{Associação Brasileira de Computadores}
+\sigla{xyz}{lorem ipsum dolor sit}
+\sigla{ijk}{lorem ipsum dolor sit}
+
+lorem ipsum dolor sit amet Capítulo~\ref{chap:intro} consetetur
+sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore
+et dolore magna aliquyam erat sed diam voluptua at vero eos et
+accusam et justo duo dolores et ea rebum stet clita kasd gubergren
+no sea takimata sanctus est lorem ipsum dolor sit amet lorem ipsum
+dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod.~\cite{COFFMANPACKING98}
+
+%----------------------------------------------------------------------------------
+
+
+%REVISAO BIBLIOGRAFICA
+%----------------------------------------------------------------------------------
+
+\chapter{\label{chap:revbiblio}Revisão Bibliográfica}
+
+%lorem ipsum dolor sit amet Capítulo~\ref{chap:intro} consetetur
+%sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore
+%et dolore magna aliquyam erat sed diam voluptua at vero eos et
+%accusam et justo duo dolores et ea rebum stet clita kasd gubergren
+%no sea takimata sanctus est lorem ipsum dolor sit amet lorem ipsum
+%dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod.~\cite{PICCOLIAPL11}
+
+%-----------------------------------------------------------------
+\section{\label{sec:secao1}Jogos}
+
+\subsection{\label{sec:secao1.1}Teoria de Jogos}
+
+Jogos são muito utilizados como ambiente de teste para inteligências artificiais. Jogos podem ser divididos entre diversas categorias, o que ajuda à classifica-los e determinar a sua complexidade dentro da área de inteligência artificial. As categorias são:
+
+\begin{itemize}
+
+   \item Determinismo: Jogos podem ser determinísticos ou estocásticos, onde existem elementos de chance que não dependem do jogador. 
+   \item Observáveis (ou de Informação Perfeita ou Imperfeita): Classifica se o jogo possui elementos ocultos aos jogadores ou não.
+   \item Soma-zero: Se a soma dos pontos obtidos por todos os jogadores é sempre zero ou se pode haver diferenças entre a pontuação, sobrar ou faltar pontos.
+   \item Turnos: As ações tomadas nos jogos podem ser sempre em sequencia ou acontecer simultaneamente.
+   \item Número de Jogadores.
+   \item Tempo de Jogo: Se as ações são discretas ou em tempo real.
+   
+\end{itemize}
+   
+Essas categorias nos ajudam à avaliar os jogos e considerar qual o melhor algoritmo para resolve-lo. Resolver um jogo é ter o comportamento ótimo neste, o que pode significar obter a vitória ou outro tipo de recompensa específico ao qual o agente deseja dentro do jogo.
+
+\subsection{\label{sec:secao1.2}Minimax}
+
+O Minimax é um algoritmo muito utilizado como modelo para resolver jogos deterministicos, observaveis, de soma-zero, jogados em turnos, de 2 jogadores e tempo de jogo discreto.  
+Esse algoritmo funciona com estados, jogadas e uma função de utilidade, para calcular quanto vale cada estado final do jogo.
+
+\begin{itemize}
+
+   \item De um certo estado atual de jogo, toda a arvore de jogo é criada e os estados finais da árvore tem a sua utilidade calculada utilizando a função de utilidade. 
+   \item Partindo do estado final, a utilidade de cada estado intermediário do jogo é calculado subindo pela árvore, sempre trocando entre uma etapa de maximização de utilidade e outra de minimização, para simular a jogada de ambos os jogadores, partindo do pressuposto de que ambos vão sempre buscar as jogadas ótimas, que possuem maior utilidade.
+   \item Finalmente, quando a raiz é atingida, a maior utilidade é escolhida dentre os estados imediatamente abaixo do estado raiz e uma jogada é feita pela máquina.
+   
+\end{itemize}
+
+Este algoritmo serve de modelo ideal para resolver diversos jogos, porém é bastante custoso e complexo, devido ao seu fator de ramificação alto, ou seja, a árvore de possibilidades de jogada cresce rapidamente e torna vários jogos intratáveis para um computador. 
+Existem diversas maneiras de lidar com este problema, a maior parte das técnicas visam cortar a árvore de jogo afim de descartar jogadas e estados "ruins" mais rapidamente.
+
+\begin{itemize}
+
+   \item Alpha-Beta-Prunning permite que estados que não seriam explorados pela regra de maximização e minimização sejam considerados durante a formação da arvore. 
+   \item Funções de Avaliação permitem que a utilidade seja calculada antes de se chegar ao fim do jogo, assim a arvore não precisa estar completa. Para avaliar jogadas não finais, o algoritmo necessita ter um conhecimento prévio das regras e estratégias do jogo e uma heurística para estimar as utilidades.
+   
+\end{itemize}
+
+A desvantagem dessas abordagens é a necessidade de se ter conhecimento do domínio, as regras e a qualidade das jogadas do jogo, que é custoso e exige um estudo aprofundado do jogo, algo que muitos jogos não dispõem o que torna essas abordagens caras ou inviaveis.
+
+%-----------------------------------------------------------------
+
+\section{\label{sec:secao2}Tomada de Decisão}
+
+\subsection{\label{sec:secao2.1}Markov Decision Problem(MDP)}
+
+Busca encontrar a política ótima em um sistema de decisões sequenciais em um ambiente acessível e estocástico, definindo um sistema de estados, ações, um modelo de transição e uma política. Estados representam cenários possíveis do problema. Ações levam o problema de um estado para outro. O modelo de transição aponta qual a utilidade de cada ação em relação à cada estado. A política é a estratégia que será tomada para cada estado, tendo em vista que o problema é estocástico e as transições entre estados via ações não é exata e depende de chance. Existe uma política ótima que resolve o problema com o melhor aproveitamento de utilidades.
+
+\subsection{\label{sec:secao2.2}Partially Observable Markov Decision Processes (POMDPs)}
+
+Se o problema de Markov não tiver o modelo de transição disponível, o processo de se descobrir as utilidades passa a ser parte do problema. 
+
+%--------------------------------------------------------------
+
+\section{\label{sec:secao3}Aprendizado por Reforço}
+
+\subsection{\label{sec:secao3.1}Função de Recompensa}
+
+\subsection{\label{sec:secao3.2}Q-Value e Q-Learning}
+
+\subsection{\label{sec:secao3.3}Exploração (descobrimento) vs. Exploração (aproveitamento): 
+(exploration vs exploitation - tradução meia tosca)}
+
+%---------------------------------------------------------------
+
+\section{\label{sec:secao4}Métodos de Monte-Carlo}
+
+\subsection{\label{sec:secao4.1}Árvore de Pesquisa de Monte-Carlo}
+
+A Árvore de Pesquisa de Monte Carlo é um algoritmo moderno para resolver jogos que não exige conhecimento do domínio do jogo, diferente das técnicas de corte do Minimax e tem as qualidades dessas técnicas por não necessitar exploração total da árvore de jogo.
+Outra vantagem desse algoritmo em relação ao Minimax é que ele pode ser usado em jogos estocásticos, onde existem elementos de chance, em jogos não observáveis, onde existem elementos ocultos ao jogador e jogos de vários jogadores. O Minimax possui versões para resolver esses tipos de jogos, mas elas são mais caras e complexas do que este algoritmo. -(talvez podemos falar de expectimax?)-
+O algoritmo funciona em 4 estágios, construindo uma árvore de jogo assim como a do Minimax, a partir de um nodo raiz são expandidos os futuros possíveis nodos da árvore, cada nodo representando um estado de jogo.
+
+\begin{itemize}
+
+   \item Seleção: Do nodo raiz, é selecionado um nodo inexplorado da árvore de jogo a partir de uma politica de seleção, que busca reduzir o arrependimento do algoritmo, escolhendo a jogada mais promissora buscando lucrar ou explorar. -(conceito de aprendizado por reforço, 
+   correto?)-
+   
+   \item Expansão: Um ou mais nodos são adicionados como filhos do nodo 
+   selecionado a partir das jogadas válidas possíveis.
+   
+   \item Simulação: O jogo é simulado a partir de um ou mais nodos gerados na fase de expansão a partir de uma política de jogo padrão, que pode ser movimentos aleatórios, semi-aleatórios ou algo mais sofisticado. Quanto mais sofisticada a política padrão, mais cara e lenta fica a fase de simulação.
+   
+   \item Propagação Inversa: Com a recompensa -(também de aprendizdo por reforço, correto?)- obtida na fase de Simulação, a estatística de cada nodo é atualizada.
+   
+\end{itemize}
+
+Com uma quantidade suficiente de simulações, a melhor jogada pode ser inferida a partir de uma política de jogo padrão simples, ou até mesmo aleatória, devido a experiencia obtida pela propagação dos resultados da simulação na árvore.
+Cada nodo guarda 2 valores que compoem as suas informações estatisticas:
+
+\begin{itemize}
+
+   \item Q-Value: O valor de recompensa que foi obtido escolhendo tal nodo.
+   
+   \item Numero de Visitações: Quantas vezes este nodo já foi escolhido para ser explorado.
+   
+\end{itemize}
+
+É importante para o algoritmo ter uma boa política de seleção baseada nestas duas variaveis, pois a jogada ótima pode estar "escondida" por uma jogada tentadora a curto prazo e o equilibrio entre lucro e exploração deve ser garantido na fase de seleção.
+
+\subsection{\label{sec:secao4.2}N-Armed-Bandit Problem}
+
+\subsection{\label{sec:secao4.3}Upper-Confidence-Bound (UCB)}
+
+\subsection{\label{sec:secao4.4}Variações de MCTS}
+
+%---------------------------------------------------------------
+
+\section{\label{sec:secao5}Colonizadores de Catan}
+
+
+%-----------------------------------------------------------------
+
+%----------------------------------------------------------------------------------
+
+
+%OBJETIVOS
+%----------------------------------------------------------------------------------
+
+\chapter{\label{chap:objetivos}Objetivos}
+
+lorem ipsum dolor sit amet Capítulo~\ref{chap:intro} consetetur
+sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore
+et dolore magna aliquyam erat sed diam voluptua at vero eos et
+accusam et justo duo dolores et ea rebum stet clita kasd gubergren
+no sea takimata sanctus est lorem ipsum dolor sit amet lorem ipsum
+dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod.
+
+%-----------------------------------------------------------------
+\section{\label{sec:gerais}Objetivos Gerais}
+
+lorem ipsum dolor sit amet Capítulo~\ref{chap:intro} consetetur
+sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore
+et dolore magna aliquyam erat sed diam voluptua at vero eos et
+accusam et justo duo dolores et ea rebum stet clita kasd gubergren
+no sea takimata sanctus est lorem ipsum dolor sit amet lorem ipsum
+dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod.
+%-----------------------------------------------------------------
+
+%-----------------------------------------------------------------
+\section{\label{sec:espec}Objetivos Específicos}
+
+lorem ipsum dolor sit amet Capítulo~\ref{chap:intro} consetetur
+sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore
+et dolore magna aliquyam erat sed diam voluptua at vero eos et
+accusam et justo duo dolores et ea rebum stet clita kasd gubergren
+no sea takimata sanctus est lorem ipsum dolor sit amet lorem ipsum
+dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod.
+%-----------------------------------------------------------------
+
+%----------------------------------------------------------------------------------
+
+
+%ANALISE E PROJETO
+%----------------------------------------------------------------------------------
+
+\chapter{\label{chap:ana&proj}Análise e Projeto}
+
+lorem ipsum dolor sit amet Capítulo~\ref{chap:intro} consetetur
+sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore
+et dolore magna aliquyam erat sed diam voluptua at vero eos et
+accusam et justo duo dolores et ea rebum stet clita kasd gubergren
+no sea takimata sanctus est lorem ipsum dolor sit amet lorem ipsum
+dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod.
+
+%-----------------------------------------------------------------
+\section{\label{sec:ativ}Atividades}
+
+lorem ipsum dolor sit amet Capítulo~\ref{chap:intro} consetetur
+sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore
+et dolore magna aliquyam erat sed diam voluptua at vero eos et
+accusam et justo duo dolores et ea rebum stet clita kasd gubergren
+no sea takimata sanctus est lorem ipsum dolor sit amet lorem ipsum
+dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod.
+%-----------------------------------------------------------------
+
+%-----------------------------------------------------------------
+\section{\label{sec:crono}Cronograma}
+
+lorem ipsum dolor sit amet Capítulo~\ref{chap:intro} consetetur
+sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore
+et dolore magna aliquyam erat sed diam voluptua at vero eos et
+accusam et justo duo dolores et ea rebum stet clita kasd gubergren
+no sea takimata sanctus est lorem ipsum dolor sit amet lorem ipsum
+dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod.
+%-----------------------------------------------------------------
+
+%----------------------------------------------------------------------------------
