@@ -1201,6 +1201,12 @@ e-mails <rfbpiccoli at gmail dot com> e <marcelo dot cohen at pucrs dot br>^^J
 
 \AtEndOfClass{%
    \renewcommand*{\familydefault}{\sfdefault}
+   
+   %\usepackage[proportional,scaled=1.064]{erewhon}
+   %\usepackage[erewhon,vvarbb,bigdelims]{newtxmath}
+   %\usepackage[T1]{fontenc}
+   %\renewcommand*\oldstylenums[1]{\textosf{#1}}
+   
    \renewcommand{\chaptername}{}
    \urlstyle{same}
    \normalfont\normalsize
